@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500&family=Roboto:wght@400;500&display=swap");
+.app {
+  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
+  .link {
+    text-decoration: none;
+    color: #fff;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
