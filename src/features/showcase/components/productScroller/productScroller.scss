@@ -1,0 +1,79 @@
+.productScrollerContainer {
+  display: flex;
+  flex-direction: column;
+  // border: 1px solid red;
+
+  .productSlider {
+    .slick-prev {
+      z-index: 10;
+      top: 45%;
+      left: 2%;
+    }
+    .slick-next {
+      z-index: 10;
+      top: 45%;
+      right: 3%;
+    }
+    .slick-prev::before {
+      font-size: 30px;
+    }
+    .slick-next::before {
+      font-size: 30px;
+    }
+
+    .ProductSliderCard {
+      display: flex;
+      flex-direction: column;
+      // background: #000;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      .image {
+        border: 1px solid #ccc;
+        width: 200px;
+        height: 200px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+      .productSliderInfo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px 0;
+        span {
+        }
+        .priceAndDiscounts {
+          display: flex;
+          // align-items: center;
+          justify-content: space-between;
+          width: 80%;
+          .price {
+            color: #222;
+          }
+          .discount {
+            background: #cc0c39;
+            color: #fff;
+            border: 1px solid #ccc;
+            padding: 2px 3px;
+            border-radius: 3px;
+          }
+        }
+      }
+    }
+  }
+}

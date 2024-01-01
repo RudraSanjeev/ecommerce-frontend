@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0;
   //   justify-content: space-between;
 
   background: rgb(19, 25, 33);
@@ -14,9 +14,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-left: 10px;
 
     height: 40px;
-    width: auto;
+    width: fit-content;
     position: relative;
     flex: 0.6;
     margin-top: 15px;
@@ -24,6 +25,7 @@
     img {
       height: 100%;
       width: 100%;
+      object-fit: contain;
     }
   }
 
@@ -114,6 +116,7 @@
 
       // login card
       .loginCard {
+        z-index: 10;
         position: absolute;
         top: 100%;
         background: #f1f1f1;

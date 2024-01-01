@@ -1,12 +1,40 @@
 .bannerContainer {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  width: 100%;
+  position: relative;
+  margin-bottom: -315px;
+
   .bannerSlider {
+    overflow-x: hidden;
+
     display: flex;
     flex-direction: column;
 
+    .slick-prev {
+      z-index: 10;
+      top: 25%;
+      left: 2%;
+    }
+    .slick-next {
+      z-index: 10;
+      top: 25%;
+      right: 3%;
+    }
+    .slick-prev::before {
+      font-size: 30px;
+    }
+    .slick-next::before {
+      font-size: 30px;
+    }
+
     img {
+      overflow-x: hidden;
+
       width: 100%;
       z-index: -1;
-      margin-bottom: -150px;
+      // margin-bottom: -150px;
       mask-image: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 1),
