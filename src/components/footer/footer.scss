@@ -1,6 +1,9 @@
 .footerContainer {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 
   .backToTop {
     background: rgb(55, 71, 90);
@@ -9,6 +12,9 @@
     color: #fff;
     padding: 15px 0;
     font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
   }
   .footerGridContainer {
     width: 100%;

@@ -1,0 +1,44 @@
+.registerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .registerAmazonLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 40px;
+    width: fit-content;
+    position: relative;
+    // flex: 0.6;
+    margin-top: 15px;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .form {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    form {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+
+      .registerMobileInput {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+    }
+  }
+}

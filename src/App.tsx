@@ -3,6 +3,8 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Home from "./pages/Home";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import SingleProduct from "./features/singleProduct/Index";
+import Register from "./features/authentication/Index";
 
 const App = () => {
   const Layout = () => {
@@ -23,6 +25,14 @@ const App = () => {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/singleProduct",
+          element: <SingleProduct />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
         },
       ],
     },

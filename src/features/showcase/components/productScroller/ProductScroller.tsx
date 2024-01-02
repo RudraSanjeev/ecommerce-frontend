@@ -21,6 +21,7 @@ const ProductScroller = ({ scrollerItems }: Props) => {
   };
   return (
     <div className="productScrollerContainer">
+      <h1>Today’s Deals</h1>
       <Slider {...settings} className="productSlider">
         {scrollerItems.map((item) => (
           <div className="ProductSliderCard" key={item.id}>

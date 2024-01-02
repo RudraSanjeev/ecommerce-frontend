@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="footerContainer">
-      <p className="backToTop">Back to top</p>
+      <button
+        className="backToTop"
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      >
+        Back to top
+      </button>
       <div className="footerGridContainer">
         <div className="footerGrid">
           <div className="footerGridItems">

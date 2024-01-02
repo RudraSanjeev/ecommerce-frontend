@@ -1,0 +1,198 @@
+.singleProductcontainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: #222;
+  margin: 0 10px;
+
+  .imagesGrid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    position: relative;
+    min-width: 510px;
+    max-width: 514px;
+    cursor: pointer;
+
+    .singleImageBox {
+      width: 100px;
+      height: 100px;
+      //   border: 1px solid red;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    .currImage {
+      border: 1px solid skyblue;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .currentImage {
+      position: absolute;
+      top: 0%;
+      left: 105px;
+      width: 50%;
+      min-width: 405px;
+      height: fit-content;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  // productInfo
+  .singleProductInfo {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+
+    .HR {
+      height: 0.5px;
+      background: #ccc;
+      margin: 20px 0;
+    }
+
+    h2 {
+      color: #222;
+      font-weight: 500;
+      font-size: 2rem;
+    }
+    .priceAndDiscount {
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      .discount {
+        color: rgb(204, 13, 58);
+      }
+      .price {
+        sup {
+          font-weight: 300;
+        }
+        color: #222;
+        font-weight: 500;
+      }
+    }
+    small {
+      color: #333;
+      font-weight: 300;
+      //   s {
+      //     text-decoration: line-through   ;
+      //   }
+    }
+    .singleProductInfoOffer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      font-size: 1.2rem;
+      font-weight: 500;
+      cursor: pointer;
+      .singleProductOfferIcon {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .singleProductInfoDownArrow {
+        .singleProductOfferIcon {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+        }
+      }
+    }
+    // policies
+    .singleProudctPolicies {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      .singleProductPolicyBox {
+        // flex: 1;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+
+        img {
+          width: 50px;
+          height: 50px;
+          object-fit: cover;
+        }
+        small {
+          color: #333;
+          font-weight: 300;
+          text-transform: capitalize;
+          text-align: center;
+        }
+      }
+    }
+
+    // size
+    .singleProductSize {
+      margin: 20px 0;
+      label {
+        font-weight: 500;
+        font-size: large;
+        margin-right: 10px;
+      }
+    }
+    // Color
+    .singleProductColor {
+      margin: 20px 0;
+      label {
+        font-weight: 500;
+        font-size: large;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  // buy option
+  .singleProductBuyOption {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-self: flex-start;
+    margin-top: 30px;
+    .singleProductOptionAddress {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .singleProductOptionInstock {
+      color: green;
+    }
+    .singleProductAddToCart {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 20px;
+      background: rgb(255, 216, 20);
+
+      &:hover {
+        cursor: pointer;
+        outline: 0.5px solid skyblue;
+      }
+    }
+    .singleProductAddToWishlist {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 20px;
+      background: goldenrod;
+      &:hover {
+        cursor: pointer;
+        outline: 0.5px solid skyblue;
+      }
+    }
+  }
+}

@@ -1,7 +1,13 @@
 .productScrollerContainer {
   display: flex;
   flex-direction: column;
-  // border: 1px solid red;
+  background: #fff;
+  margin: 20px 10px;
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 10px 16px;
+  }
 
   .productSlider {
     .slick-prev {
@@ -15,10 +21,18 @@
       right: 3%;
     }
     .slick-prev::before {
+      //       content: '→';
+      // border-radius: 21%;
       font-size: 30px;
+      background: #a39e9e8a;
+      padding: 23px 2px;
+      border-radius: 8px;
     }
     .slick-next::before {
       font-size: 30px;
+      background: #a39e9e8a;
+      padding: 23px 2px;
+      border-radius: 8px;
     }
 
     .ProductSliderCard {
@@ -55,8 +69,8 @@
         flex-direction: column;
         gap: 10px;
         margin: 10px 0;
-        span {
-        }
+        // span {
+        // }
         .priceAndDiscounts {
           display: flex;
           // align-items: center;
