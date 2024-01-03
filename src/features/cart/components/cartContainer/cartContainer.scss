@@ -1,0 +1,36 @@
+.cartContainer {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  .cartContainerHeading {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    justify-content: space-between;
+    padding: 15px;
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+    small {
+      align-self: flex-end;
+    }
+  }
+  .hr {
+    height: 0.5px;
+    background: #ccc;
+    margin: 10px 0;
+  }
+  .cartContainerSubTotal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 10px;
+    h3 {
+      font-weight: 400;
+      font-size: 1.5rem;
+      padding-bottom: 15px;
+    }
+  }
+}

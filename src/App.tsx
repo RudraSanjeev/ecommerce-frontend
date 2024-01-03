@@ -4,8 +4,9 @@ import Footer from "./components/footer/Footer";
 import Home from "./pages/Home";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import SingleProduct from "./features/singleProduct/Index";
-import Register from "./features/authentication/Index";
-
+// import Register from "./features/authentication/Index";
+import { Register, Login } from "./features/authentication/Index";
+import CartContainer from "./features/cart/Index";
 const App = () => {
   const Layout = () => {
     return (
@@ -33,6 +34,14 @@ const App = () => {
         {
           path: "/register",
           element: <Register />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/cart",
+          element: <CartContainer />,
         },
       ],
     },
