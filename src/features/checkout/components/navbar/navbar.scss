@@ -1,0 +1,54 @@
+.checkoutNavbarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  background: #f5efe9b0;
+  padding: 0 10px 10px 10px;
+  margin: 0 10px;
+
+  .checkoutNavbarLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px;
+
+    height: 40px;
+    width: fit-content;
+    position: relative;
+    flex: 0.6;
+    margin-top: 15px;
+
+    img {
+      width: 100%;
+      height: 80%;
+      object-fit: contain;
+    }
+  }
+
+  .checkoutNavbarHeading {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 1.7rem;
+    color: #222;
+  }
+  .checkoutNavbarLock {
+    flex: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    // background: red;
+    /* width: 36px; */
+    height: 30px;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
