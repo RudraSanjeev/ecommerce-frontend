@@ -8,6 +8,7 @@ import SingleProduct from "./features/singleProduct/Index";
 import { Register, Login } from "./features/authentication/Index";
 import CartContainer from "./features/cart/Index";
 import Checkout from "./features/checkout/Index";
+import AddUserAddress from "./features/address/components/singleAddress/AddUserAddress";
 const App = () => {
   const Layout = () => {
     return (
@@ -47,6 +48,10 @@ const App = () => {
         {
           path: "/checkout",
           element: <Checkout />,
+        },
+        {
+          path: "/address",
+          element: <AddUserAddress />,
         },
       ],
     },

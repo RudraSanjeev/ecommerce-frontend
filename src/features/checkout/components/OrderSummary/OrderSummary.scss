@@ -1,0 +1,88 @@
+.checkoutOptionCardContainerRightOrderSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  align-items: center;
+  justify-content: start;
+  border-radius: 10px;
+  width: 260px;
+  position: sticky;
+  top: 20px;
+
+  .checkoutOptionCardContainerRightOrderSummaryButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    button {
+      background: gold;
+      color: #222;
+      padding: 10px;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    small {
+      color: #222;
+      text-align: center;
+      font-size: 8pz;
+    }
+  }
+  .checkoutOptionCardContainerRightOrderSummaryInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    // background: yellow;
+    gap: 5px;
+    width: 90%;
+    h3 {
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+
+    .checkoutOptionCardContainerRightOrderSummaryInfoItem {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .checkoutOptionCardContainerRightOrderSummaryInfoTotal {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      color: #b12704 !important;
+      font-weight: bold;
+      font-size: 1.2rem;
+      // background: yellow;
+      span {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+  .checkoutOptionCardContainerRightOrderSummaryLink {
+    display: flex;
+    small {
+      display: flex;
+      align-items: center;
+      font-size: small;
+
+      // .loginLinks {
+      color: #0066c0;
+      //   text-decoration: none;
+      &:hover {
+        color: rgb(196, 51, 51);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+}

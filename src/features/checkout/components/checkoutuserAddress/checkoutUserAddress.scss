@@ -1,0 +1,19 @@
+.checkoutUserAddress {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  //   background: yellow;
+  background: #fff;
+  width: 60%;
+  margin: auto;
+  .checkoutUserAddressheading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+    .checkoutUserAddressHeadingText {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #222;
+    }
+  }
+}

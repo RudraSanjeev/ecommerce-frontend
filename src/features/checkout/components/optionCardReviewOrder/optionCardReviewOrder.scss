@@ -1,0 +1,292 @@
+.checkoutOptionCardReviewOrderContainer {
+  display: flex;
+  gap: 20px;
+
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 10px;
+  min-width: fit-content;
+
+  .hr {
+    height: 0.5px;
+    background: #ccc;
+
+    display: flex;
+    width: 98%;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+  }
+
+  .checkoutOptionCardReviewOrder {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    &:first-child {
+      flex: 1;
+      align-self: flex-start;
+      justify-self: start;
+    }
+    &:nth-child(2) {
+      flex: 2;
+      align-items: center;
+      .checkoutOptionCardReviewOrderInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        color: #222;
+        font-size: medium;
+        color: green;
+        font-weight: 500;
+
+        align-items: center;
+        .checkoutOptionCardReviewOrderInfoProduct {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          //   border: 1px solid red;
+          .checkoutOptionCardReviewOrderInfoProductImg {
+            width: 150px;
+            height: 100px;
+            position: relative;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+          .checkoutOptionCardReviewOrderInfoProductImgDesc {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            font-size: medium;
+            color: #333;
+            font-weight: 300;
+          }
+        }
+      }
+    }
+    &:last-child {
+      flex: 0.5;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      span {
+        display: flex;
+        align-items: center;
+        font-size: small;
+
+        // .loginLinks {
+        color: #0066c0;
+        //   text-decoration: none;
+        &:hover {
+          color: rgb(196, 51, 51);
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        // }
+        .checkoutOptionCardReviewOrdercloseIcon {
+          font-size: medium;
+        }
+      }
+    }
+    h3 {
+      font-size: large;
+      font-weight: 500;
+      color: #222;
+    }
+  }
+
+  .checkoutOptionCardReviewOrderOpenConatainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 10px;
+    flex-direction: column;
+
+    min-width: 100%;
+    .checkoutOptionCardReviewOrderOpenHeading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      .headingText {
+        font-weight: 500;
+        font-size: 1.3rem;
+        color: #b12704 !important;
+      }
+      .checkoutOptionCardReviewOrderCloseButton {
+        display: flex;
+        align-items: center;
+        font-size: small;
+
+        color: #0066c0;
+        &:hover {
+          color: rgb(196, 51, 51);
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        .checkoutOptionCardReviewOrdercloseIcon {
+          font-size: medium;
+        }
+      }
+    }
+    .checkoutOptionCardReviewOrderBox {
+      display: flex;
+      min-width: 95%;
+      gap: 0px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 10px;
+      margin-left: 10px;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      gap: 5px;
+
+      h3 {
+        font-weight: 500;
+        font-size: large;
+        color: green;
+      }
+      .checkoutOptionCardReviewOrderBoxProduct {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .checkoutOptionCardReviewOrderBoxProductImg {
+          flex: 0.5;
+          width: 150px;
+          height: 100px;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+        .checkoutOptionCardReviewOrderBoxProductInfo {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          color: #222;
+          //   border: 1px solid red;
+          .checkoutOptionCardReviewOrderBoxProductInfoDesc {
+            font-weight: 500;
+          }
+          .checkoutOptionCardReviewOrderBoxProductInfoPrice {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 10px;
+            .checkoutOptionCardReviewOrderBoxProductInfoPriceLineThrough {
+              color: #111;
+              text-decoration: line-through;
+              //   font-size: medium;
+            }
+            .checkoutOptionCardReviewOrderBoxProductInfoPriceText {
+              color: rgb(196, 51, 51);
+              font-weight: 500;
+              font-size: medium;
+            }
+          }
+          .checkoutOptionCardReviewOrderBoxProductInfoQuantity {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 10px;
+            color: red;
+            .checkoutOptionCardReviewOrderBoxProductInfoQuantityText {
+              color: #111;
+              font-weight: 500;
+            }
+            select {
+              outline: none;
+              padding: 3px;
+            }
+          }
+        }
+        .checkoutOptionCardReviewOrderBoxProductDeliveryAddress {
+          flex: 1;
+          display: flex;
+          justify-content: start;
+          //   border: 2px solid blue;
+          align-self: flex-start;
+          flex-direction: column;
+          gap: 5px;
+
+          .checkoutOptionCardReviewOrderBoxProductDeliveryAddressKey {
+            color: #222;
+            font-weight: 500;
+          }
+          .checkoutOptionCardReviewOrderBoxProductDeliveryAddressValue {
+            color: green;
+            display: flex;
+            align-items: start;
+            justify-content: start;
+            flex-direction: column;
+            gap: 10px;
+            text-transform: capitalize;
+            font-weight: 500;
+            .checkoutOptionCardReviewOrderBoxProductDeliveryAddressValueLink {
+              font-size: medium;
+            }
+          }
+        }
+      }
+      .checkoutOptionCardUseThisReviewOrderButton {
+        display: flex;
+        background: #ebe7e75c;
+        border-top: 1px solid #ccc;
+        width: 100%;
+        padding: 10px 0;
+        align-items: center;
+        justify-content: start;
+        gap: 20px;
+
+        button {
+          flex: 0.5;
+          width: fit-content;
+          max-width: fit-content;
+          background: gold;
+          color: #222;
+          padding: 10px;
+          border: none;
+          outline: none;
+          border-radius: 10px;
+          font-weight: bold;
+          &:hover {
+            background: #f1ce10;
+            cursor: pointer;
+          }
+        }
+        .checkoutOptionCardUseThisReviewOrderButtonBox {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          .checkoutOptionCardUseThisReviewOrderButtonBoxOrderTotal {
+            color: #b12704 !important;
+            font-size: large;
+            font-weight: 500;
+          }
+          small {
+            .checkoutOptionCardUseThisReviewOrderButtonBoxOrderTotalLink {
+              color: #0066c0;
+              text-decoration: none;
+              margin: 0 5px;
+              &:hover {
+                color: rgb(196, 51, 51);
+                text-decoration: underline;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

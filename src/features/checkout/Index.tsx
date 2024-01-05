@@ -1,11 +1,12 @@
 import Navbar from "./components/navbar/Navbar";
-import OptionCard from "./components/optionCard/OptionCard";
+// import OptionCardAddress from "./components/optionCardAddress/OptionCardAddress";
+import Home from "./pages/home/Home";
 
 const Index = () => {
   return (
     <div>
       <Navbar />
-      <OptionCard />
+      <Home />
     </div>
   );
 };
