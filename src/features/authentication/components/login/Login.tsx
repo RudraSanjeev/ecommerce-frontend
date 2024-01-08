@@ -1,18 +1,53 @@
 import "./login.scss";
 import logo from "../../assets/amazon.png";
+import AuthService, {
+  LoginEntity,
+} from "../../../../services/axios/AuthService";
 
 import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
-  const [isEmail, setEmail] = useState<string>("");
   const [hidePassword, setHidePassword] = useState(false);
+  const [message, setMessage] = useState<any>("");
+  // const [token, setToken] = useState<string | null>(null);
 
-  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+  const [loginData, setLoginData] = useState<LoginEntity>({
+    email: "",
+    password: "",
+  });
+  const nav = useNavigate();
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+
+    setLoginData({
+      ...loginData,
+      [name]: value,
+    });
   };
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    console.log(loginData);
+    AuthService.login(loginData)
+      .then((res) => {
+        // setMessage(res);
+        console.log("response data" + res);
+      })
+      .catch((error: AxiosError) => {
+        console.log("error: " + error.response?.data);
+        setMessage(error.response?.data);
+      });
+    if (AuthService.getToken()) {
+      nav("/");
+    }
+
+    setTimeout(() => {
+      setMessage(null);
+    }, 3000);
   };
+
   return (
     <div className="registerContainer">
       <div className="registerAmazonLogo">
@@ -20,9 +55,9 @@ const Login = () => {
       </div>
       <div className="form">
         <h3>Sign in</h3>
-        {isEmail && hidePassword && (
+        {loginData.email && hidePassword && (
           <p className="loginchangeEmail">
-            {isEmail}
+            {loginData.email}
             <button
               className="loginButton"
               onClick={(e) => {
@@ -40,7 +75,12 @@ const Login = () => {
               <label htmlFor="Email or mobile phone number">
                 Email or mobile phone number
               </label>
-              <input type="email" onChange={handleEmail} value={isEmail} />
+              <input
+                type="email"
+                name="email"
+                value={loginData.email}
+                onChange={handleChange}
+              />
             </span>
           )}
           {hidePassword && (
@@ -48,7 +88,7 @@ const Login = () => {
               <span
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
-                <label htmlFor="Your password">Password</label>
+                <label htmlFor="Your password">Password </label>
                 <Link
                   to="/"
                   className="loginLinks"
@@ -57,13 +97,30 @@ const Login = () => {
                   Forgot
                 </Link>
               </span>
-              <input type="password" placeholder="Your Password" />
+              <input
+                type="password"
+                name="password"
+                placeholder="Your Password"
+                onChange={handleChange}
+              />
+              {message && (
+                <span
+                  style={{
+                    margin: "10px 0",
+                    color: "red",
+                    fontSize: "medium",
+                    textAlign: "center",
+                  }}
+                >
+                  {message}
+                </span>
+              )}
             </span>
           )}
           <small>password must be atleast 6 characters</small>
           {!hidePassword && (
             <button
-              disabled={!isEmail.includes("@")}
+              disabled={!loginData.email.includes("@")}
               onClick={(e) => {
                 e.preventDefault();
                 setHidePassword(!hidePassword);

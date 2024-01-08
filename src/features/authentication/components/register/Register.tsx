@@ -1,7 +1,46 @@
 import "./register.scss";
 import logo from "../../assets/amazon.png";
 import { Link } from "react-router-dom";
+import AuthService from "../../../../services/axios/AuthService";
+import { RegisterEntity } from "../../../../services/axios/AuthService";
+import { useState } from "react";
+import { AxiosError } from "axios";
+
 const Register = () => {
+  const [formData, setFormData] = useState<RegisterEntity>({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+  });
+  const [message, setMessage] = useState<string | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleRegister = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log(formData);
+    AuthService.register(formData)
+      .then((res) => {
+        setMessage(res);
+      })
+      .catch((error: AxiosError) => {
+        console.log(error.response?.data);
+        setMessage(error.message);
+      });
+
+    setTimeout(() => {
+      setMessage(null);
+    }, 3000);
+  };
+
   return (
     <div className="registerContainer">
       <div className="registerAmazonLogo">
@@ -12,7 +51,12 @@ const Register = () => {
         <form>
           <span className="registerInputSpan">
             <label htmlFor="Your name">Your name</label>
-            <input type="text" placeholder="first and last name" />
+            <input
+              type="text"
+              placeholder="first and last name"
+              name="fullName"
+              onChange={handleChange}
+            />
           </span>
           <span className="registerInputSpan">
             <label htmlFor="Mobile number">Mobile number</label>
@@ -25,19 +69,35 @@ const Register = () => {
                 <option value="+13">+13</option>
                 <option value="+15">+15</option>
               </select>
-              <input type="text" placeholder="Mobile number" />
+              <input
+                type="text"
+                placeholder="Mobile number"
+                name="phoneNumber"
+                onChange={handleChange}
+              />
             </span>
           </span>
           <span className="registerInputSpan">
             <label htmlFor="Your email">Email</label>
-            <input type="email" placeholder="Your Email" />
+
+            <input
+              type="email"
+              placeholder="Your Email"
+              name="email"
+              onChange={handleChange}
+            />
           </span>
           <span className="registerInputSpan">
             <label htmlFor="Your password">Password</label>
-            <input type="password" placeholder="Your Password" />
+            <input
+              type="password"
+              placeholder="Your Password"
+              name="password"
+              onChange={handleChange}
+            />
           </span>
           <small>password must be atleast 6 characters</small>
-          <button>Submit</button>
+          <button onClick={handleRegister}>Submit</button>
         </form>
         <span className="registerSignInSpan">
           Already have an account?{" "}
@@ -45,6 +105,18 @@ const Register = () => {
             signin
           </Link>
         </span>
+        {message && (
+          <span
+            style={{
+              margin: "10px 0",
+              color: "red",
+              fontSize: "medium",
+              textAlign: "center",
+            }}
+          >
+            something went wrong
+          </span>
+        )}
       </div>
 
       <div className="loginFooterTagContainer">
