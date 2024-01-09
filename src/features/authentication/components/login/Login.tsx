@@ -8,6 +8,9 @@ import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateLogin } from "../../../../redux/userSlice";
+
 const Login = () => {
   const [hidePassword, setHidePassword] = useState(false);
   const [message, setMessage] = useState<any>("");
@@ -17,6 +20,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const dispatch = useDispatch();
   const nav = useNavigate();
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -33,7 +38,15 @@ const Login = () => {
     AuthService.login(loginData)
       .then((res) => {
         // setMessage(res);
-        console.log("response data" + res);
+        // console.log("username " + res.username, "token: " + res.token);
+        // const firstName = res.username.slice(" ")[0];
+        // console.log(firstName);
+        dispatch(
+          updateLogin({
+            fullName: res.username,
+            token: res.token,
+          })
+        );
       })
       .catch((error: AxiosError) => {
         console.log("error: " + error.response?.data);

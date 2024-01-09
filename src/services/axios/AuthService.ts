@@ -16,6 +16,7 @@ export interface LoginEntity {
 const URL = "http://localhost:8000/api/auth";
 class AuthService {
   private static TOKEN_KEY = "token";
+  private static USER_NAME = "username";
   // : Promise<string>
   static login = ({ email, password }: LoginEntity) => {
     // Make an API call to authenticate the user
@@ -27,11 +28,11 @@ class AuthService {
       .then((response) => {
         // Assuming the server responds with a token upon successful login
         const token = response.data.accessToken;
-
+        const username = response.data.fullName;
         // Save token to local storage
         localStorage.setItem(AuthService.TOKEN_KEY, token);
-
-        return token;
+        localStorage.setItem(AuthService.USER_NAME, username);
+        return { token, username };
       })
       .catch((error: AxiosError) => {
         // Handle login error (e.g., incorrect credentials, server error)
@@ -43,11 +44,16 @@ class AuthService {
   static logout = (): void => {
     // Remove token from local storage on logout
     localStorage.removeItem(AuthService.TOKEN_KEY);
+    localStorage.removeItem(AuthService.USER_NAME);
   };
 
   static getToken = (): string | null => {
     // Retrieve token from local storage
     return localStorage.getItem(AuthService.TOKEN_KEY);
+  };
+  static getUsername = (): string | null => {
+    // Retrieve token from local storage
+    return localStorage.getItem(AuthService.USER_NAME);
   };
   static register = ({
     fullName,

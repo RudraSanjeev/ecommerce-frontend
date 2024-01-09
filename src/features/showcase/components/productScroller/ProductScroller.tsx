@@ -2,16 +2,16 @@ import "./productScroller.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-interface Props {
+export interface Products {
   scrollerItems: {
     id: string | number;
-    desc: string;
+    title: string;
     price: number | string;
     image: string;
-    discount: string;
+    discount?: string;
   }[];
 }
-const ProductScroller = ({ scrollerItems }: Props) => {
+const ProductScroller = ({ scrollerItems }: Products) => {
   const settings = {
     infinite: true,
     arrows: true,
@@ -29,10 +29,10 @@ const ProductScroller = ({ scrollerItems }: Props) => {
               <img src={item.image} alt="productImgErr" />
             </div>
             <div className="productSliderInfo">
-              <span>{item.desc}</span>
+              <span>{item.title}</span>
               <div className="priceAndDiscounts">
                 <span className="price"> $ {item.price}</span>
-                <span className="discount"> {item.discount}</span>
+                <span className="discount"> {item.discount || "40% OFF"}</span>
               </div>
             </div>
           </div>

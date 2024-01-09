@@ -13,12 +13,12 @@ import { Link } from "react-router-dom";
 interface Props {
   id: number | string;
   images: string[];
-  desc: string;
+  title: string;
   price: number | string;
-  discount: string | number;
+  discount?: string | number;
 }
 [];
-const SingleProduct = ({ images, desc, price, discount }: Props) => {
+const SingleProduct = ({ images, title, price, discount }: Props) => {
   const [currImage, setCurrImage] = useState<string>(images[0]);
 
   return (
@@ -40,7 +40,7 @@ const SingleProduct = ({ images, desc, price, discount }: Props) => {
         </div>
       </div>
       <div className="singleProductInfo">
-        <h2>{desc}</h2>
+        <h2>{title}</h2>
         <span className="HR"></span>
         <div className="priceAndDiscount">
           <span className="discount">- {discount} %</span>

@@ -5,8 +5,13 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Header = () => {
   const [show, setShow] = useState<Boolean>(true);
+  const { fullName } = useSelector((state: any) => state.user.userInfo);
+  // console.log(fullName);
+  // console.log(token);
   return (
     <div className="headerContainer">
       <div className="headerLogo">
@@ -26,7 +31,9 @@ const Header = () => {
           </select>
         </span>
         <span className="headerOptionItem" onClick={() => setShow(!show)}>
-          <small style={{ cursor: "pointer" }}>Hello, sign in</small>
+          <small style={{ cursor: "pointer" }}>
+            Hello, {fullName ? fullName : "sign in"}
+          </small>
           <h4>
             Acounts & Lists
             <span>
@@ -39,7 +46,11 @@ const Header = () => {
           >
             <ArrowDropUpIcon className="upArrow" />
             <div className="login">
-              <button>Login</button>
+              <button>
+                <Link to="/login" className="link" style={{ color: "#000" }}>
+                  Login
+                </Link>
+              </button>
             </div>
             <div className="userInfo">
               <span>Your Orders</span>
