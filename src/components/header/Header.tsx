@@ -10,8 +10,11 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const [show, setShow] = useState<Boolean>(true);
   const { fullName } = useSelector((state: any) => state.user.userInfo);
-  // console.log(fullName);
-  // console.log(token);
+  const cartRedux = useSelector((state: any) => state.cart);
+  // console.log("productId: " + productId);
+  // console.log("quantity: " + quantity);
+  // console.log("totalPrice: " + totalPrice);
+  console.log(cartRedux);
   return (
     <div className="headerContainer">
       <div className="headerLogo">

@@ -1,5 +1,5 @@
 import "./singleProduct.scss";
-import { useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
@@ -9,22 +9,103 @@ import policy2 from "../../assets/singleProductPolicies/icon-returns._CB48405909
 import policy3 from "../../assets/singleProductPolicies/icon-top-brand._CB617044271_.png";
 import policy4 from "../../assets/singleProductPolicies/trust_icon_free_shipping_81px._CB630870460_.png";
 import { Link } from "react-router-dom";
-
+import APIClient from "../../../../services/axios/apiClient";
+import AuthService from "../../../../services/axios/AuthService";
+import { addItemToCart } from "../../../../redux/cartSlice";
+import { useDispatch } from "react-redux";
 interface Props {
   id: number | string;
   images: string[];
   title: string;
   price: number | string;
+  currency: string;
+  size: string[] | number[];
+  color: string[];
+  inStock: string;
+  quantity: string;
   discount?: string | number;
 }
 [];
-const SingleProduct = ({ images, title, price, discount }: Props) => {
-  const [currImage, setCurrImage] = useState<string>(images[0]);
+const SingleProduct = ({
+  id,
+  images,
+  title,
+  price,
+  discount,
+  currency,
+  size,
+  color,
+  inStock,
+  quantity,
+}: Props) => {
+  const apiClient = new APIClient("/carts");
+  const [currImage, setCurrImage] = useState<string>(images[0] || "");
+  const [cartQuantity, setCartQuantity] = useState<any>(1);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setCurrImage(images[0]);
+  }, [images, id]);
+
+  const handleCartChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setCartQuantity(e.target.value);
+  };
+
+  const handleCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    apiClient
+      .addToCart(
+        { items: { productId: id, quantity: parseInt(cartQuantity) } },
+        {
+          headers: {
+            token: `Bearer ${AuthService.getToken()}`,
+          },
+        }
+      )
+      .then((res) => {
+        const items = res.items;
+        const itemLen = items.length;
+        // dispatch(addItemToCart({
+        //    {productId: items[itemLen-2].productId,
+        //   quantity: items[itemLen-2].quantity
+        // }, totalPrice: res.totalPrice }));
+        {
+          res.items &&
+            dispatch(
+              addItemToCart({
+                productId: items[itemLen - 1].productId,
+                quantity: parseInt(cartQuantity),
+                totalPrice: res.totalPrice,
+              })
+            );
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    // apiClient
+    //   .getAllCarts({
+    //     headers: {
+    //       token: `Bearer ${AuthService.getToken()}`,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     // const totalPrice = res.totalPrice;
+
+    //     // res.items.map((item :any) =>{
+    //     //     dispatch({cartItems: [...item]})
+    //     // })
+    //     // const items = res.items;
+    //     // const itemLen = items.length();
+    //     // dispatch(addItemToCart({ cartItems: {productId: items[itemLen-2].productId, quantity: items[itemLen-2].quantity}, totalPrice: res.totalPrice }));
+    //   });
+  };
 
   return (
     <div className="singleProductcontainer">
       <div className="imagesGrid">
-        {images.map((item) => (
+        {images?.map((item) => (
           <div
             key={item}
             className={
@@ -45,12 +126,12 @@ const SingleProduct = ({ images, title, price, discount }: Props) => {
         <div className="priceAndDiscount">
           <span className="discount">- {discount} %</span>
           <span className="price">
-            <sup>$</sup>
+            <sup>{currency == "INR" ? "Rs" : "$"}</sup>
             {price}
           </span>
         </div>
         <small>
-          M.R.P.: <s>$7999</s>
+          M.R.P.: <s>{currency == "INR" ? "Rs" : "$"}7999</s>
         </small>
         <span className="HR"></span>
         <span className="singleProductInfoOffer">
@@ -83,19 +164,21 @@ const SingleProduct = ({ images, title, price, discount }: Props) => {
         <div className="singleProductSize">
           <label htmlFor="size">Size: </label>
           <select>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+            {size.map((item) => (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            ))}
           </select>
         </div>
         <div className="singleProductColor">
           <label htmlFor="size">Color: </label>
           <select>
-            <option value="red">red</option>
-            <option value="yellow">yellow</option>
-            <option value="blue">blue</option>
+            {color.map((item) => (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -111,17 +194,25 @@ const SingleProduct = ({ images, title, price, discount }: Props) => {
             update location
           </Link>
         </span>
-        <span className="singleProductOptionInstock">instock </span>
+        <span
+          className="singleProductOptionInstock"
+          style={inStock ? {} : { color: "red" }}
+        >
+          {inStock ? "instock" : "out of stock"}{" "}
+        </span>
         <span>
           <label htmlFor="Quantity">Quantity: </label>
-          <select defaultValue=" 1" name="Quantity" id="Quantity">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+          <select defaultValue="1" name="Quantity" onChange={handleCartChange}>
+            {[...Array(quantity)].map((_, index) => (
+              <option key={index + 1} value={index + 1}>
+                {index + 1}
+              </option>
+            ))}
           </select>
         </span>
-        <button className="singleProductAddToCart">Add to Cart</button>
+        <button className="singleProductAddToCart" onClick={handleCart}>
+          Add to Cart
+        </button>
         <button className="singleProductAddToWishlist">Add to Wishlist</button>
       </div>
     </div>

@@ -1,16 +1,16 @@
-import iphone1 from "../assets/mobiles/1/1.jpg";
-import iphone2 from "../assets/mobiles/1/2.jpg";
-import iphone3 from "../assets/mobiles/1/3.jpg";
-import iphone4 from "../assets/mobiles/1/4.jpg";
-import iphone5 from "../assets/mobiles/1/5.jpg";
-import iphone6 from "../assets/mobiles/1/6.jpg";
+// import iphone1 from "../assets/mobiles/1/1.jpg";
+// import iphone2 from "../assets/mobiles/1/2.jpg";
+// import iphone3 from "../assets/mobiles/1/3.jpg";
+// import iphone4 from "../assets/mobiles/1/4.jpg";
+// import iphone5 from "../assets/mobiles/1/5.jpg";
+// import iphone6 from "../assets/mobiles/1/6.jpg";
 
-// import onePlus1 from "../assets/mobiles/2/1.jpg";
-// import onePlus2 from "../assets/mobiles/2/2.jpg";
-// import onePlus3 from "../assets/mobiles/2/3.jpg";
-// import onePlus4 from "../assets/mobiles/2/4.jpg";
-// import onePlus5 from "../assets/mobiles/2/5.jpg";
-// import onePlus6 from "../assets/mobiles/2/6.jpg";
+import onePlus1 from "../assets/mobiles/2/1.jpg";
+import onePlus2 from "../assets/mobiles/2/2.jpg";
+import onePlus3 from "../assets/mobiles/2/3.jpg";
+import onePlus4 from "../assets/mobiles/2/4.jpg";
+import onePlus5 from "../assets/mobiles/2/5.jpg";
+import onePlus6 from "../assets/mobiles/2/6.jpg";
 
 // import realMe1 from "../assets/mobiles/3/1.jpg";
 // import realMe2 from "../assets/mobiles/3/2.jpg";
@@ -31,19 +31,20 @@ import policy3 from "../assets/singleProductPolicies/icon-top-brand._CB617044271
 import policy4 from "../assets/singleProductPolicies/trust_icon_free_shipping_81px._CB630870460_.png";
 
 export const singleMobileData = [
+  // {
+  //   id: 1,
+  //   images: [iphone1, iphone2, iphone3, iphone4, iphone5, iphone6],
+  //   title: "All new Iphone 15 pro max",
+  //   price: 180000,
+  //   discount: 65,
+  // },
   {
     id: 1,
-    images: [iphone1, iphone2, iphone3, iphone4, iphone5, iphone6],
-    desc: "All new Iphone 15 pro max",
+    images: [onePlus1, onePlus2, onePlus3, onePlus4, onePlus5, onePlus6],
+    title: "All new Iphone 15 pro max",
     price: 180000,
     discount: 65,
   },
-  //   {
-  //     images: [onePlus1, onePlus2, onePlus3, onePlus4, onePlus5, onePlus6],
-  //     desc: "All new Iphone 15 pro max",
-  //     price: 180000,
-  //     discount: 65,
-  //   },
   //   {
   //     images: [realMe1, realMe2, realMe3, realMe4, realMe5, realMe6, realMe7],
   //     desc: "All new Iphone 15 pro max",

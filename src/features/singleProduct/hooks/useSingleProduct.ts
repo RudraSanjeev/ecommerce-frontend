@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import APIClient from "../../../services/axios/apiClient";
+// import axios from "axios";
 // import { Products } from "../components/productScroller/ProductScroller";
 
 const useSingleProduct = (productId: any) => {
@@ -7,16 +8,16 @@ const useSingleProduct = (productId: any) => {
   const apiClient = new APIClient(`/products/${productId}`);
 
   const [product, setProduct] = useState<any>({});
-  console.log(productId);
+
   useEffect(() => {
     apiClient
       .getSingleProduct()
       .then((res) => {
         setProduct(res);
-        console.log(res);
+        // setProduct(res);
       })
       .catch((res) => console.log(res));
-  }, []);
+  }, [productId]);
 
   return { product };
 };

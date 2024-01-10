@@ -2,6 +2,7 @@ import "./productScroller.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 export interface Products {
   scrollerItems: {
     id: string | number;
@@ -25,16 +26,24 @@ const ProductScroller = ({ scrollerItems }: Products) => {
       <Slider {...settings} className="productSlider">
         {scrollerItems.map((item) => (
           <div className="ProductSliderCard" key={item.id}>
-            <div className="image">
-              <img src={item.image} alt="productImgErr" />
-            </div>
-            <div className="productSliderInfo">
-              <span>{item.title}</span>
-              <div className="priceAndDiscounts">
-                <span className="price"> $ {item.price}</span>
-                <span className="discount"> {item.discount || "40% OFF"}</span>
+            <Link
+              to={`products/${item.id}`}
+              style={{ textDecoration: "none", color: "initial" }}
+            >
+              <div className="image">
+                <img src={item.image} alt="productImgErr" />
               </div>
-            </div>
+              <div className="productSliderInfo">
+                <span>{item.title}</span>
+                <div className="priceAndDiscounts">
+                  <span className="price"> $ {item.price}</span>
+                  <span className="discount">
+                    {" "}
+                    {item.discount || "40% OFF"}
+                  </span>
+                </div>
+              </div>
+            </Link>
           </div>
         ))}
       </Slider>

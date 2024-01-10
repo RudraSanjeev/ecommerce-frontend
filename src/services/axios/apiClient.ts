@@ -3,6 +3,8 @@ import AuthService from "./AuthService";
 
 export interface FetchResponse<T> {
   data: T[];
+  items?: any;
+  totalPrice?: any;
 }
 
 const axiosInstance = axios.create({
@@ -13,7 +15,7 @@ axiosInstance.interceptors.request.use((config) => {
   // Include the token in the request headers
   const token = AuthService.getToken();
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.token = `Bearer ${token}`;
   }
   return config;
 });
@@ -25,21 +27,47 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
+  getAllProducts = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => {
+        // console.log(res.data);
+
+        return res.data;
+      });
+  };
+
   getSingleProduct = (
     config?: AxiosRequestConfig
   ): Promise<FetchResponse<T>> => {
     return axiosInstance
       .get<FetchResponse<T>>(this.endpoint, config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         return res.data;
       });
   };
 
-  getAllProducts = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
+  addToCart = (
+    data: any,
+
+    config?: AxiosRequestConfig
+  ): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .post<FetchResponse<T>>(this.endpoint, data, config)
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      });
+  };
+
+  getAllCarts = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
     return axiosInstance
       .get<FetchResponse<T>>(this.endpoint, config)
-      .then((res) => res.data);
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      });
   };
 }
 
