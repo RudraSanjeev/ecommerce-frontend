@@ -1,38 +1,152 @@
+import { ChangeEvent, useState } from "react";
 import "./singleCart.scss";
-interface Props {
-  image: string;
-  productInfos: {
-    desc: string;
-    inStock: Boolean;
-    size: number | string;
-    color: string;
-    price: number | string;
-    discount: string | number;
-    MRP: string | number;
-  };
+import APIClient from "../../../../services/axios/apiClient";
+import { useDispatch } from "react-redux";
+import AuthService from "../../../../services/axios/AuthService";
+import { updateCart } from "../../../../redux/cartSlice";
+import axios from "axios";
+export interface Products {
+  id: string;
+  image: string[];
+  title: string;
+  inStock: Boolean;
+  size: string[];
+  color: string[];
+  price: number | string;
+  cartQuantity: number;
+  discount?: string | number;
+  MRP?: string | number;
 }
-const SingleCart = ({ image, productInfos }: Props) => {
-  const { desc, inStock, size, color, price, discount, MRP } = productInfos;
+const SingleCart = ({
+  id,
+  image,
+  title,
+  inStock,
+  size,
+  color,
+  price,
+  cartQuantity,
+  discount,
+  MRP,
+}: Products) => {
+  // console.log("title: " + title);
+  // console.log("image: " + image[0]);
+  // console.log("quantity: " + cartQuantity);
+  const dispatch = useDispatch();
+  const apiClient = new APIClient(`/carts`);
+  const [currCartQuantity, setQuantity] = useState<number>(cartQuantity);
+
+  const handleCartQuantity = (e: ChangeEvent<HTMLSelectElement>) => {
+    setQuantity(parseInt(e.target.value));
+  };
+
+  const handleCartUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log(currCartQuantity);
+    axios
+      .patch(
+        `http://localhost:8000/api/carts/${id}`,
+        { items: { quantity: currCartQuantity } },
+        {
+          headers: {
+            token: `Bearer ${AuthService.getToken()}`,
+          },
+        }
+      )
+      .then((res) => {
+        dispatch(
+          updateCart({
+            cartItems: res.data.items,
+            totalPrice: res.data.totalPrice,
+          })
+        );
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  // const handleCartDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault();
+  //   axios
+  //     .delete(`http://localhost:8000/api/carts/${id}`, {
+  //       headers: {
+  //         token: `Bearer ${AuthService.getToken()}`,
+  //       },
+  //     }).then((res)=>{
+
+  //     })
+
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //     });
+
+  //   apiClient.getAllCarts().then((res) => {
+  //     dispatch(
+  //       updateCart({
+  //         cartItems: res.items,
+  //         totalPrice: res.totalPrice,
+  //       })
+  //     );
+  //   });
+  // };
+
+  const handleCartDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    axios
+      .delete(`http://localhost:8000/api/carts/${id}`, {
+        headers: {
+          token: `Bearer ${AuthService.getToken()}`,
+        },
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      })
+      .finally(() => {
+        apiClient.getAllCarts().then((res) => {
+          dispatch(
+            updateCart({
+              cartItems: res.items,
+              totalPrice: res.totalPrice,
+            })
+          );
+        });
+      });
+  };
+  const handleAddToWishlist = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    axios
+      .post(`http://localhost:8000/api/wishlists`, {
+        headers: {
+          token: `Bearer ${AuthService.getToken()}`,
+        },
+      })
+
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <div className="singleCartContainer">
       <div className="imageContainer">
-        <img src={image} alt="imgErr" />
+        <img src={image[0]} alt="imgErr" />
       </div>
       <div className="cartInfo">
-        <h3>{desc}</h3>
+        <h3>{title || "no title"}</h3>
         <small style={inStock ? { color: "green" } : { color: "red" }}>
           {inStock == true ? "inStock" : "Out of Stock"}
         </small>
         <small className="cartInfoSmallBold">
-          size: <span>{size} </span>
+          size: <span>{size[0]} </span>
         </small>
         <small className="cartInfoSmallBold">
-          size: <span>{color}</span>
+          color: <span>{color[0]}</span>
         </small>
         <div className="singleCartActionOption">
           <span className="singleCartActionSelect">
             <label htmlFor="Qty">Qty: </label>
-            <select defaultValue={1}>
+            <select defaultValue={cartQuantity} onChange={handleCartQuantity}>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -41,13 +155,13 @@ const SingleCart = ({ image, productInfos }: Props) => {
             </select>
           </span>
           <span className="singleCartActionButton">
-            <button>Update</button>
+            <button onClick={handleCartUpdate}>Update</button>
           </span>
           <span className="singleCartActionButton">
-            <button>delete</button>
+            <button onClick={handleCartDelete}>delete</button>
           </span>
           <span className="singleCartActionButton">
-            <button>Add to Wishlist</button>
+            <button onClick={handleAddToWishlist}>Add to Wishlist</button>
           </span>
         </div>
       </div>

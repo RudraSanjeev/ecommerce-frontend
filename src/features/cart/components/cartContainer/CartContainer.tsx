@@ -1,13 +1,90 @@
 import "./cartContainer.scss";
 import { singleCartData } from "../../data/singleCartData";
 import SingleCart from "../singleCart/SingleCart";
-
+import { useEffect, useState } from "react";
+import APIClient from "../../../../services/axios/apiClient";
+import { useSelector } from "react-redux";
+import { Products } from "../singleCart/SingleCart";
 interface Props {
   total: number;
   quantity: number;
 }
 
 const CartContainer = ({ total, quantity }: Props) => {
+  const { cartItems } = useSelector((state: any) => state.cart);
+
+  // const [cartProducts, setCartProducts] = useState<Products[]>([]);
+  const [cartProducts, setCartProducts] = useState<Products[]>([]);
+
+  // useEffect(() => {
+  //   const fetchProductDetails = async () => {
+  //     const newCartProducts: any[] = [];
+
+  //     for (let item of cartItems) {
+  //       const apiClient = new APIClient(`/products/${item.productId}`);
+  //       apiClient
+  //         .getproduct()
+  //         .then((res) => {
+  //           // console.log(res);
+  //           const singleProduct = {
+  //             id: res._id,
+  //             image: res.img,
+  //             title: res.title,
+  //             inStock: res.inStock,
+  //             size: res.size,
+  //             price: res.price,
+  //             discount: "40% off",
+  //             MRP: "42433",
+  //           };
+  //           newCartProducts.push(singleProduct);
+  //         })
+  //         .catch((err) => console.log(err));
+  //     }
+  //     setCartProducts(newCartProducts);
+
+  //     // ... (rest of the logic)
+  //   };
+
+  //   fetchProductDetails();
+  // }, [cartItems]);
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      const newCartProducts: any[] = [];
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+        const apiClient = new APIClient(`/products/${item.productId}`);
+
+        try {
+          const res = await apiClient.getproduct();
+
+          const singleProduct = {
+            id: res._id,
+            image: res.img,
+            title: res.title,
+            inStock: res.inStock,
+            size: res.size,
+            color: res.color,
+            price: res.price,
+            cartQuantity: item.quantity,
+            discount: "40% off",
+            MRP: "42433",
+          };
+
+          newCartProducts.push(singleProduct);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      setCartProducts(newCartProducts);
+    };
+
+    fetchProductDetails();
+  }, [cartItems]);
+  console.log(cartProducts);
+
   return (
     <div className="cartContainer">
       <div className="cartContainerLeft">
@@ -17,12 +94,18 @@ const CartContainer = ({ total, quantity }: Props) => {
         </div>
         <span className="hr"></span>
 
-        {singleCartData.map((item) => (
+        {cartProducts.map((item) => (
           <div key={item.id} className="singleCartBox">
             <SingleCart {...item} />
             <span className="hr"></span>
           </div>
         ))}
+        {/* {singleCartData.map((item) => (
+          <div key={item.id} className="singleCartBox">
+            <SingleCart {...item} />
+            <span className="hr"></span>
+          </div>
+        ))} */}
 
         <div className="cartContainerSubTotal">
           <h3>Subtotal: $ {total}</h3>

@@ -10,16 +10,18 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const [show, setShow] = useState<Boolean>(true);
   const { fullName } = useSelector((state: any) => state.user.userInfo);
-  const cartRedux = useSelector((state: any) => state.cart);
+  const { cartItems } = useSelector((state: any) => state.cart);
   // console.log("productId: " + productId);
   // console.log("quantity: " + quantity);
   // console.log("totalPrice: " + totalPrice);
-  console.log(cartRedux);
+  // console.log(cartRedux);
   return (
     <div className="headerContainer">
-      <div className="headerLogo">
-        <img src={logo} alt="navLogoErr" />
-      </div>
+      <Link to="/" style={{ textDecoration: "none", color: "initial" }}>
+        <div className="headerLogo">
+          <img src={logo} alt="navLogoErr" />
+        </div>
+      </Link>
       <div className="headerSearch">
         <input type="text" placeholder="search Here" />
         <button>
@@ -66,10 +68,12 @@ const Header = () => {
           <small>Returs</small>
           <h4>& Orders</h4>
         </span>
-        <span className="headerOptionItem">
-          <small id="cartNumber">0</small>
-          <ShoppingCartOutlinedIcon />
-        </span>
+        <Link to="/carts" style={{ textDecoration: "none", color: "initial" }}>
+          <span className="headerOptionItem">
+            <small id="cartNumber">{cartItems.length}</small>
+            <ShoppingCartOutlinedIcon />
+          </span>
+        </Link>
       </div>
     </div>
   );

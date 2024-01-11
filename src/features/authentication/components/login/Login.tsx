@@ -4,14 +4,18 @@ import AuthService, {
   LoginEntity,
 } from "../../../../services/axios/AuthService";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateLogin } from "../../../../redux/userSlice";
-
+import { updateCart } from "../../../../redux/cartSlice";
+import APIClient from "../../../../services/axios/apiClient";
 const Login = () => {
+  const apiClient = new APIClient("/carts");
+  const dispatch = useDispatch();
+  const nav = useNavigate();
   const [hidePassword, setHidePassword] = useState(false);
   const [message, setMessage] = useState<any>("");
   // const [token, setToken] = useState<string | null>(null);
@@ -21,8 +25,26 @@ const Login = () => {
     password: "",
   });
 
-  const dispatch = useDispatch();
-  const nav = useNavigate();
+  useEffect(() => {
+    AuthService.getToken() &&
+      apiClient
+        .getAllCarts({
+          headers: {
+            token: `Bearer ${AuthService.getToken()}`,
+          },
+        })
+        .then((res) => {
+          // console.log(res);
+
+          dispatch(
+            updateCart({
+              cartItems: res.items,
+              totalPrice: res.totalPrice,
+            })
+          );
+        });
+  }, [AuthService.getToken()]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -34,7 +56,7 @@ const Login = () => {
   };
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(loginData);
+    // console.log(loginData);
     AuthService.login(loginData)
       .then((res) => {
         // setMessage(res);
