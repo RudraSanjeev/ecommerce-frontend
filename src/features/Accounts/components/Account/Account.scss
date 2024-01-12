@@ -1,0 +1,69 @@
+.yourAccountContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+
+  .yourAccountWrapper {
+    display: flex;
+    // background: yellow;
+    align-items: start;
+    // justify-content: center;
+    flex-direction: column;
+    min-height: 80vh;
+    margin: 10px;
+
+    h1 {
+      font-weight: 500;
+      font-size: 2rem;
+      margin: 10px 0;
+    }
+
+    .yourAccountWrapperBoxes {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      .yourAccountSingleBox {
+        text-transform: capitalize;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #ccc;
+        padding: 5px;
+        gap: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover {
+          background: rgb(237, 234, 234);
+        }
+        .yourAccountSingleBoxImg {
+          //   display: flex;
+          //   align-items: center;
+
+          width: 80px;
+          height: 80px;
+          position: relative;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
+        .yourAccountSingleBoxInfo {
+          h3 {
+            color: #222;
+            font-weight: 300;
+            margin-bottom: 5px;
+          }
+          p {
+            color: #555;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.yourUploadAddressSingleBox {
+  text-transform: capitalize;
+  flex: 1;
+  display: flex;
+  width: 263px;
+  height: 175px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  border: 2px dotted #aeacac;
+  border-style: dashed;
+  border-width: 2px;
+  border-color: #c7c7c7;
+  padding: 5px;
+  gap: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  .yourUploadAddressSingleBoxIcon {
+    font-size: 5rem;
+    color: #ccc;
+  }
+  h3 {
+    font-size: 1.3rem;
+    // font-weight: 600;
+  }
+}

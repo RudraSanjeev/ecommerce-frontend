@@ -8,8 +8,13 @@ import SingleProduct from "./features/singleProduct/Index";
 import { Register, Login } from "./features/authentication/Index";
 import CartContainer from "./features/cart/Index";
 import Checkout from "./features/checkout/Index";
-import AddUserAddress from "./features/address/components/singleAddress/AddUserAddress";
-
+// import AddUserAddress from "./features/address/components/singleAddress/AddUserAddress";
+import {
+  Account,
+  Address,
+  AddressForm,
+  OrderContainer,
+} from "./features/Accounts/Index";
 // import APIClient from "./services/axios/apiClient";
 
 const App = () => {
@@ -53,8 +58,20 @@ const App = () => {
           element: <Checkout />,
         },
         {
-          path: "/address",
-          element: <AddUserAddress />,
+          path: "/accounts",
+          element: <Account />,
+        },
+        {
+          path: "/accounts/address",
+          element: <Address />,
+        },
+        {
+          path: "/accounts/address/add",
+          element: <AddressForm />,
+        },
+        {
+          path: "/accounts/orders",
+          element: <OrderContainer />,
         },
       ],
     },

@@ -8,6 +8,7 @@ export interface FetchResponse<T> {
   data: T[];
   items?: any;
   totalPrice?: any;
+  quantity: number | string;
   img: string;
   _id: string;
   title: string;
@@ -16,6 +17,12 @@ export interface FetchResponse<T> {
   size: string[];
   color: string[];
   price: string[];
+  total: string | number;
+  paymentToken: string;
+  paymentStatus: string;
+  orderStatus: string;
+  paymentMode: string;
+  createdAt: string;
 }
 
 const axiosInstance = axios.create({
@@ -73,6 +80,16 @@ class APIClient<T> {
   };
 
   getAllCarts = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      });
+  };
+  getAllOrdersOfParticularUser = (
+    config?: AxiosRequestConfig
+  ): Promise<FetchResponse<T>> => {
     return axiosInstance
       .get<FetchResponse<T>>(this.endpoint, config)
       .then((res) => {

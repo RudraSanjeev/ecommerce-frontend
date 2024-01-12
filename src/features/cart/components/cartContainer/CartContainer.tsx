@@ -1,6 +1,6 @@
 import "./cartContainer.scss";
-import { singleCartData } from "../../data/singleCartData";
-import SingleCart from "../singleCart/SingleCart";
+// import { singleCartData } from "../../data/singleCartData";
+import SingleOrder from "../singleCart/SingleCart";
 import { useEffect, useState } from "react";
 import APIClient from "../../../../services/axios/apiClient";
 import { useSelector } from "react-redux";
@@ -10,43 +10,11 @@ interface Props {
   quantity: number;
 }
 
-const CartContainer = ({ total, quantity }: Props) => {
+const OrderContainer = ({ total, quantity }: Props) => {
   const { cartItems } = useSelector((state: any) => state.cart);
 
   // const [cartProducts, setCartProducts] = useState<Products[]>([]);
   const [cartProducts, setCartProducts] = useState<Products[]>([]);
-
-  // useEffect(() => {
-  //   const fetchProductDetails = async () => {
-  //     const newCartProducts: any[] = [];
-
-  //     for (let item of cartItems) {
-  //       const apiClient = new APIClient(`/products/${item.productId}`);
-  //       apiClient
-  //         .getproduct()
-  //         .then((res) => {
-  //           // console.log(res);
-  //           const singleProduct = {
-  //             id: res._id,
-  //             image: res.img,
-  //             title: res.title,
-  //             inStock: res.inStock,
-  //             size: res.size,
-  //             price: res.price,
-  //             discount: "40% off",
-  //             MRP: "42433",
-  //           };
-  //           newCartProducts.push(singleProduct);
-  //         })
-  //         .catch((err) => console.log(err));
-  //     }
-  //     setCartProducts(newCartProducts);
-
-  //     // ... (rest of the logic)
-  //   };
-
-  //   fetchProductDetails();
-  // }, [cartItems]);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -89,14 +57,14 @@ const CartContainer = ({ total, quantity }: Props) => {
     <div className="cartContainer">
       <div className="cartContainerLeft">
         <div className="cartContainerHeading">
-          <h1>Shopping Cart</h1>
+          <h1>Your Orders</h1>
           <small>Price</small>
         </div>
         <span className="hr"></span>
 
         {cartProducts.map((item) => (
           <div key={item.id} className="singleCartBox">
-            <SingleCart {...item} />
+            <SingleOrder {...item} />
             <span className="hr"></span>
           </div>
         ))}
@@ -123,4 +91,4 @@ const CartContainer = ({ total, quantity }: Props) => {
   );
 };
 
-export default CartContainer;
+export default OrderContainer;
