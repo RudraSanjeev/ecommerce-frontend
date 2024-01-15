@@ -6,15 +6,33 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import AuthService from "../../services/axios/AuthService";
+import { useNavigate } from "react-router-dom";
+import { updateLogin } from "../../redux/userSlice";
 const Header = () => {
+  const nav = useNavigate();
+  const dispatch = useDispatch();
   const [show, setShow] = useState<Boolean>(true);
+
   const { fullName } = useSelector((state: any) => state.user.userInfo);
   const { cartItems } = useSelector((state: any) => state.cart);
   // console.log("productId: " + productId);
   // console.log("quantity: " + quantity);
   // console.log("totalPrice: " + totalPrice);
   // console.log(cartRedux);
+
+  const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    localStorage.clear();
+    dispatch(
+      updateLogin({
+        fullName: null,
+        token: null,
+      })
+    );
+    nav("/");
+  };
   return (
     <div className="headerContainer">
       <Link to="/" style={{ textDecoration: "none", color: "initial" }}>
@@ -51,17 +69,43 @@ const Header = () => {
           >
             <ArrowDropUpIcon className="upArrow" />
             <div className="login">
-              <button>
-                <Link to="/login" className="link" style={{ color: "#000" }}>
-                  Login
+              {AuthService.getToken() ? (
+                <button onClick={handleLogout}>Logout</button>
+              ) : (
+                <button>
+                  <Link
+                    to="/login"
+                    className="link"
+                    style={{ color: "initial", textDecoration: "none" }}
+                  >
+                    Login
+                  </Link>
+                </button>
+              )}
+            </div>
+            {AuthService.getToken() && (
+              <div className="userInfo">
+                <Link
+                  to="/accounts"
+                  style={{ textDecoration: "none", color: "initial" }}
+                >
+                  <span>Accounts </span>
                 </Link>
-              </button>
-            </div>
-            <div className="userInfo">
-              <span>Your Orders</span>
-              <span>Your Cart Items </span>
-              <span>Your Wishlists </span>
-            </div>
+                <Link
+                  to="/accounts/orders"
+                  style={{ textDecoration: "none", color: "initial" }}
+                >
+                  <span>Your Orders</span>
+                </Link>
+
+                <Link
+                  to="/accounts/wishlists"
+                  style={{ textDecoration: "none", color: "initial" }}
+                >
+                  <span>Your Wishlists </span>
+                </Link>
+              </div>
+            )}
           </div>
         </span>
         <span className="headerOptionItem">

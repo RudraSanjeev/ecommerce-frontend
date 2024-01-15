@@ -7,13 +7,15 @@ import SingleProduct from "./features/singleProduct/Index";
 // import Register from "./features/authentication/Index";
 import { Register, Login } from "./features/authentication/Index";
 import CartContainer from "./features/cart/Index";
-import Checkout from "./features/checkout/Index";
+// import Checkout from "./features/checkout/Index";
+import Payment from "./features/payment/components/payment";
 // import AddUserAddress from "./features/address/components/singleAddress/AddUserAddress";
 import {
   Account,
   Address,
   AddressForm,
   OrderContainer,
+  WishlistContainer,
 } from "./features/Accounts/Index";
 // import APIClient from "./services/axios/apiClient";
 
@@ -55,7 +57,7 @@ const App = () => {
         },
         {
           path: "/checkout",
-          element: <Checkout />,
+          element: <Payment />,
         },
         {
           path: "/accounts",
@@ -72,6 +74,10 @@ const App = () => {
         {
           path: "/accounts/orders",
           element: <OrderContainer />,
+        },
+        {
+          path: "/accounts/wishlists",
+          element: <WishlistContainer />,
         },
       ],
     },

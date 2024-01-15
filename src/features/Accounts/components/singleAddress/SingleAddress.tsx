@@ -1,35 +1,36 @@
 import "./singleAddress.scss";
-interface Props {
-  name: string;
-  houseName: string;
-  streetName: string;
+export interface AddressEntity {
+  _id?: string | number;
+  fullName: string;
+  houseNo: string;
+  landmark: string;
   city: string;
   state: string;
   pincode: string | number;
   country: string;
-  phoneNumber: string;
+  mobileNumber: string;
 }
 const SingleAddress = ({
-  name,
-  houseName,
-  streetName,
+  fullName,
+  houseNo,
+  landmark,
+  mobileNumber,
   city,
   state,
   pincode,
   country,
-  phoneNumber,
-}: Props) => {
+}: AddressEntity) => {
   return (
     <div className="yourAddressSingleBox">
-      <h3>{name}</h3>
-      <span className="yourAddressHouseName addressInfo">{houseName}</span>
-      <span className="yourAddressStreetName addressInfo">{streetName}</span>
+      <h3>{fullName}</h3>
+      <span className="yourAddressHouseName addressInfo">{houseNo}</span>
+      <span className="yourAddressStreetName addressInfo">{landmark}</span>
       <span className="yourAddressCityStatePin addressInfo">
         {city}, {state}, {pincode}
       </span>
       <span className="yourAddressCountry addressInfo">{country}</span>
       <span className="yourAddressPhoneNumber addressInfo">
-        phone number: {phoneNumber}
+        phone number: {mobileNumber}
       </span>
       <div className="options">
         <span className="singleAddressActionButton">

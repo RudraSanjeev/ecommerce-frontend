@@ -1,91 +1,43 @@
-.singleCartContainer {
+.singleOrderHistoryContainer {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  .imageContainer {
-    flex: 1;
-    max-width: 150px;
-    position: relative;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+  justify-content: space-between;
+  // flex-direction: column;
+  // background: yellow;
+  width: 90%;
+  padding: 0 20px;
+  .singleOrderHistoryImgBox {
+    // border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    flex-wrap: wrap;
+    width: fit-content;
+    padding: 10px;
+    // background: yellow;
+    gap: 5px;
+    width: 200px;
+    .singleOrderHistoryMultipleItemImgBox {
+      width: 60px;
+      height: 60px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
     }
   }
-  .cartInfo {
-    flex: 3;
+  .singleOrderHistoryInfoBox {
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
     flex-direction: column;
+    align-content: center;
+    justify-content: center;
     gap: 10px;
-    h3 {
-      font-weight: 500;
-      font-size: large;
-      color: #111;
-    }
-    .cartInfoSmallBold {
-      font-weight: 500;
-      span {
-        font-weight: 300;
-      }
-    }
-    .singleCartActionOption {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-
-      .singleCartActionSelect {
-        select {
-          outline: none;
-          border: 1px solid #ccc;
-          padding: 2px;
-        }
-      }
-      .singleCartActionButton {
-        button {
-          background: transparent;
-          border: none;
-          color: #0066c0;
-          &:hover {
-            color: rgb(202, 147, 6);
-            text-decoration: underline;
-            cursor: pointer;
-          }
-        }
-      }
-    }
   }
-  .cartPrice {
-    flex: 1;
+  .singleOrderHistoryPriceBox {
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
     flex-direction: column;
-    gap: 8px;
-    margin-right: 10px;
-    .singleCartPriceDiscount {
-      background: #cc0c39;
-      font-size: small;
-      color: #fff;
-      padding: 5px;
-      font-weight: 500;
-      border-radius: 2px;
-    }
-
-    .singleCartPrice {
-      color: #222;
-    }
-    .singleCartMRP {
-      font-size: 14px;
-      color: #222;
-      small {
-        font-weight: 400;
-        text-decoration: line-through;
-      }
-    }
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
   }
 }

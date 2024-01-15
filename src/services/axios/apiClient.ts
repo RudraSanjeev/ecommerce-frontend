@@ -23,6 +23,8 @@ export interface FetchResponse<T> {
   orderStatus: string;
   paymentMode: string;
   createdAt: string;
+  productInfo: any[];
+  length: number;
 }
 
 const axiosInstance = axios.create({
@@ -78,6 +80,18 @@ class APIClient<T> {
         return res.data;
       });
   };
+  addNewAddress = (
+    data: any,
+
+    config?: AxiosRequestConfig
+  ): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .post<FetchResponse<T>>(this.endpoint, data, config)
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      });
+  };
 
   getAllCarts = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
     return axiosInstance
@@ -90,6 +104,14 @@ class APIClient<T> {
   getAllOrdersOfParticularUser = (
     config?: AxiosRequestConfig
   ): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      });
+  };
+  getAllWishlist = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
     return axiosInstance
       .get<FetchResponse<T>>(this.endpoint, config)
       .then((res) => {
@@ -110,6 +132,30 @@ class APIClient<T> {
   getproduct = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
     return axiosInstance
       .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      });
+  };
+  // addNewAddress = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
+  //   return axiosInstance
+  //     .post<FetchResponse<T>>(this.endpoint, config)
+  //     .then((res) => {
+  //       // console.log(res);
+  //       return res.data;
+  //     });
+  // };
+  getAllAddress = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      });
+  };
+  deleteWishlist = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .delete<FetchResponse<T>>(this.endpoint, config)
       .then((res) => {
         // console.log(res);
         return res.data;
