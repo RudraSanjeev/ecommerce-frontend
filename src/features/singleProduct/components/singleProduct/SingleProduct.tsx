@@ -12,10 +12,11 @@ import { Link } from "react-router-dom";
 import APIClient from "../../../../services/axios/apiClient";
 import AuthService from "../../../../services/axios/AuthService";
 import { addItemToCart } from "../../../../redux/cartSlice";
-import { useDispatch } from "react-redux";
-interface Props {
-  id: number | string;
-  images: string[];
+import { useDispatch, useSelector } from "react-redux";
+
+export interface Product {
+  _id: number | string;
+  img: string[];
   title: string;
   price: number | string;
   currency: string;
@@ -27,8 +28,8 @@ interface Props {
 }
 [];
 const SingleProduct = ({
-  id,
-  images,
+  _id,
+  img,
   title,
   price,
   discount,
@@ -37,14 +38,19 @@ const SingleProduct = ({
   color,
   inStock,
   quantity,
-}: Props) => {
+}: Product) => {
   const apiClient = new APIClient("/carts");
-  const [currImage, setCurrImage] = useState<string>(images[0] || "");
+  const [currImage, setCurrImage] = useState<string>(img[0] || "");
   const [cartQuantity, setCartQuantity] = useState<any>(1);
+
+  const { city } = useSelector((state: any) => state.address);
+
+  console.log(city);
+
   const dispatch = useDispatch();
   useEffect(() => {
-    setCurrImage(images[0]);
-  }, [images, id]);
+    setCurrImage(img[0]);
+  }, [img, _id]);
 
   const handleCartChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCartQuantity(e.target.value);
@@ -54,7 +60,7 @@ const SingleProduct = ({
     e.preventDefault();
     apiClient
       .addToCart(
-        { items: { productId: id, quantity: parseInt(cartQuantity) } },
+        { items: { productId: _id, quantity: parseInt(cartQuantity) } },
         {
           headers: {
             token: `Bearer ${AuthService.getToken()}`,
@@ -105,7 +111,7 @@ const SingleProduct = ({
   return (
     <div className="singleProductcontainer">
       <div className="imagesGrid">
-        {images?.map((item) => (
+        {img?.map((item) => (
           <div
             key={item}
             className={
@@ -185,7 +191,8 @@ const SingleProduct = ({
       {/* buy option -- rightmost */}
       <div className="singleProductBuyOption">
         <span className="singleProductOptionAddress">
-          <LocationOnOutlinedIcon /> Mohali, punjab
+          <LocationOnOutlinedIcon /> {currentAddress.city},{" "}
+          {currentAddress.state} {currentAddress.pincode}
           <Link
             to="/"
             className="link"

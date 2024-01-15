@@ -73,10 +73,12 @@ const Login = () => {
       .catch((error: AxiosError) => {
         console.log("error: " + error.response?.data);
         setMessage(error.response?.data);
+      })
+      .finally(() => {
+        if (AuthService.getToken()) {
+          nav("/");
+        }
       });
-    if (AuthService.getToken()) {
-      nav("/");
-    }
 
     setTimeout(() => {
       setMessage(null);

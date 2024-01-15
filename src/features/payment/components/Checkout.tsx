@@ -4,13 +4,12 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import Axios from "axios"; // Import Axios library
+// import Axios from "axios"; // Import Axios library
 
-interface Props {
-  onPaymentSuccess: any;
-}
-
-export default function CheckoutForm({ onPaymentSuccess }: Props) {
+// interface Props {
+//   onPaymentSuccess: any;
+// }
+const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -30,30 +29,23 @@ export default function CheckoutForm({ onPaymentSuccess }: Props) {
       return;
     }
 
-    Axios.post("/retrieve-payment-intent", { clientSecret })
-      .then((response) => {
-        const paymentIntent = response.data.paymentIntent;
-
-        switch (paymentIntent?.status) {
-          case "succeeded":
-            setMessage("Payment succeeded!");
-            onPaymentSuccess(); // Notify the parent component about the success
-            break;
-          case "processing":
-            setMessage("Your payment is processing.");
-            break;
-          case "requires_payment_method":
-            setMessage("Your payment was not successful, please try again.");
-            break;
-          default:
-            setMessage("Something went wrong.");
-            break;
-        }
-      })
-      .catch((error) =>
-        console.error("Error retrieving payment intent:", error)
-      );
-  }, [stripe, onPaymentSuccess]);
+    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+      switch (paymentIntent?.status) {
+        case "succeeded":
+          setMessage("Payment succeeded!");
+          break;
+        case "processing":
+          setMessage("Your payment is processing.");
+          break;
+        case "requires_payment_method":
+          setMessage("Your payment was not successful, please try again.");
+          break;
+        default:
+          setMessage("Something went wrong.");
+          break;
+      }
+    });
+  }, [stripe]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,34 +55,30 @@ export default function CheckoutForm({ onPaymentSuccess }: Props) {
     }
 
     setIsLoading(true);
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        // Make sure to change this to your payment completion page
+        return_url: "http://localhost:3000",
+      },
+    });
 
-    try {
-      const { data } = await Axios.post("/confirm-payment", {
-        elements,
-        confirmParams: {
-          return_url: "http://localhost:3000",
-        },
-      });
-
-      if (
-        data.error?.type === "card_error" ||
-        data.error?.type === "validation_error"
-      ) {
-        setMessage(data.error.message || "");
-      } else {
-        setMessage("An unexpected error occurred.");
-      }
-    } catch (error) {
-      console.error("Error confirming payment:", error);
+    if (error.type === "card_error" || error.type === "validation_error") {
+      setMessage(error.message || "STRIPE ERROR");
+    } else {
       setMessage("An unexpected error occurred.");
     }
 
     setIsLoading(false);
   };
 
+  const paymentElementOptions: any = {
+    layout: "tabs",
+  };
+
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" />
+      <PaymentElement id="payment-element" options={paymentElementOptions} />
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
@@ -99,4 +87,6 @@ export default function CheckoutForm({ onPaymentSuccess }: Props) {
       {message && <div id="payment-message">{message}</div>}
     </form>
   );
-}
+};
+
+export default CheckoutForm;

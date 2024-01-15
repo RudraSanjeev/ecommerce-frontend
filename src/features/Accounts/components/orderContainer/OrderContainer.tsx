@@ -52,7 +52,7 @@ const OrderContainer = () => {
 
         {orderProducts.map((item: any) => (
           <div key={item.id} className="singleCartBox">
-            <SingleOrder {...item} />
+            <SingleOrder {...item} key={item.id} />
             <span className="hr"></span>
           </div>
         ))}

@@ -171,4 +171,52 @@
       margin-right: 10px;
     }
   }
+  .searchBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    top: 52px;
+    left: 13%;
+    z-index: 20000;
+    min-width: 48%;
+    background: #fff;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border: 0.1px solid #ccc;
+    overflow: hidden;
+    gap: 1px;
+
+    .HR {
+      height: 0.5px;
+      background: #ccc;
+
+      display: flex;
+      width: 98%;
+      justify-content: center;
+      align-items: center;
+      margin: 10px auto;
+    }
+    .singleSearchProduct {
+      min-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+
+      gap: 20px;
+      .singleSearchProductImgBox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
 }

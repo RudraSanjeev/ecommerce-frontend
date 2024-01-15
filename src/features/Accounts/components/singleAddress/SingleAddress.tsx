@@ -1,4 +1,6 @@
 import "./singleAddress.scss";
+import { useDispatch } from "react-redux";
+import { setCurrentAddress } from "../../../../redux/addressSlice";
 export interface AddressEntity {
   _id?: string | number;
   fullName: string;
@@ -11,6 +13,7 @@ export interface AddressEntity {
   mobileNumber: string;
 }
 const SingleAddress = ({
+  _id,
   fullName,
   houseNo,
   landmark,
@@ -20,6 +23,24 @@ const SingleAddress = ({
   pincode,
   country,
 }: AddressEntity) => {
+  const dispatch = useDispatch();
+
+  const handleCurrentAddress = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    dispatch(
+      setCurrentAddress({
+        _id,
+        fullName,
+        houseNo,
+        landmark,
+        mobileNumber,
+        city,
+        state,
+        pincode,
+        country,
+      })
+    );
+  };
   return (
     <div className="yourAddressSingleBox">
       <h3>{fullName}</h3>
@@ -40,7 +61,7 @@ const SingleAddress = ({
           <button>Remove</button>
         </span>
         <span className="singleAddressActionButton">
-          <button>Set as Default</button>
+          <button onClick={handleCurrentAddress}>Set as Default</button>
         </span>
       </div>
     </div>

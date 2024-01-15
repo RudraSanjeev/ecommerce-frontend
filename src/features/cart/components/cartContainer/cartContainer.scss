@@ -2,7 +2,10 @@
   margin: 20px;
   display: flex;
   gap: 20px;
-  // flex-direction: column;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 
   .cartContainerLeft {
     flex: 4;
@@ -86,6 +89,7 @@
         margin-bottom: 10px;
         outline: none;
         cursor: pointer;
+        min-width: max-content;
       }
     }
   }

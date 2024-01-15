@@ -58,8 +58,8 @@ import { useEffect, useState } from "react";
 const Index = () => {
   const { productId } = useParams();
   const [item, setItems] = useState<any>({
-    id: "",
-    images: [],
+    _id: "",
+    img: [],
     title: "",
     price: "",
     currency: "",
@@ -76,8 +76,8 @@ const Index = () => {
     // Check if the product has any properties before updating the state
     if (Object.keys(product).length > 0) {
       setItems({
-        id: product._id,
-        images: product.img,
+        _id: product._id,
+        img: product.img,
         title: product.title,
         price: product.price,
         currency: product.currency,

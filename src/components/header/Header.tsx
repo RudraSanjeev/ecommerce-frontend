@@ -10,18 +10,41 @@ import { useDispatch, useSelector } from "react-redux";
 import AuthService from "../../services/axios/AuthService";
 import { useNavigate } from "react-router-dom";
 import { updateLogin } from "../../redux/userSlice";
+import APIClient from "../../services/axios/apiClient";
+import { Product } from "../../features/singleProduct/components/singleProduct/SingleProduct";
+import React from "react";
 const Header = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const [show, setShow] = useState<Boolean>(true);
-
+  const [searchProduct, setSearchProduct] = useState<Product[]>([]);
   const { fullName } = useSelector((state: any) => state.user.userInfo);
   const { cartItems } = useSelector((state: any) => state.cart);
-  // console.log("productId: " + productId);
-  // console.log("quantity: " + quantity);
-  // console.log("totalPrice: " + totalPrice);
-  // console.log(cartRedux);
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    if (e.target.value) {
+      const apiClient = new APIClient(
+        `/products/search/?keyword=${e.target.value}`
+      );
+      apiClient
+        .getAllMatchProducts()
+        .then((res: any) => {
+          setSearchProduct(res);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setSearchProduct([]);
+    }
+  };
+  // console.log(searchProduct);
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>, id: any) => {
+    e.preventDefault();
+    nav(`/products/${id}`);
+    setSearchProduct([]);
+  };
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     localStorage.clear();
@@ -41,7 +64,12 @@ const Header = () => {
         </div>
       </Link>
       <div className="headerSearch">
-        <input type="text" placeholder="search Here" />
+        <input
+          type="text"
+          id="search-input"
+          placeholder="search Here"
+          onChange={handleSearch}
+        />
         <button>
           <SearchIcon />
         </button>
@@ -119,6 +147,27 @@ const Header = () => {
           </span>
         </Link>
       </div>
+      {searchProduct.length > 0 && (
+        <div className="searchBox">
+          {searchProduct.map((item) => (
+            <React.Fragment key={item._id}>
+              <div
+                className="singleSearchProduct"
+                key={item._id}
+                onClick={(e) => handleClick(e, item._id)}
+              >
+                <div className="singleSearchProductImgBox">
+                  <img src={item.img[0] || ""} alt="imgErr" />
+                </div>
+                <div className="singleSearchProductInfoBox">
+                  <span>{item.title}</span>
+                </div>
+              </div>
+              {/* <span className="HR"></span> */}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

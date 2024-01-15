@@ -6,6 +6,12 @@
   color: #222;
   margin: 0 10px;
 
+  @media screen and (max-width: 1175px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
   .imagesGrid {
     flex: 1;
     display: flex;
@@ -16,6 +22,10 @@
     max-width: 514px;
     cursor: pointer;
 
+    @media screen and (max-width: 920px) {
+      flex-direction: row;
+    }
+
     .singleImageBox {
       width: 100px;
       height: 100px;
@@ -24,6 +34,10 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
+      }
+
+      @media screen and (max-width: 920px) {
+        margin-bottom: 435px;
       }
     }
     .currImage {
@@ -38,6 +52,10 @@
       width: 50%;
       min-width: 405px;
       height: fit-content;
+      @media screen and (max-width: 1175px) {
+        top: 112px;
+        // width: 90%;
+      }
       img {
         width: 100%;
         height: 100%;

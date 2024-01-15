@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import APIClient from "../../../../services/axios/apiClient";
 import { useSelector } from "react-redux";
 import { Products } from "../singleCart/SingleCart";
+import { Link } from "react-router-dom";
 interface Props {
   total: number;
   quantity: number;
@@ -51,13 +52,13 @@ const OrderContainer = ({ total, quantity }: Props) => {
 
     fetchProductDetails();
   }, [cartItems]);
-  console.log(cartProducts);
+  // console.log(cartProducts);
 
   return (
     <div className="cartContainer">
       <div className="cartContainerLeft">
         <div className="cartContainerHeading">
-          <h1>Your Orders</h1>
+          <h1>Your Carts</h1>
           <small>Price</small>
         </div>
         <span className="hr"></span>
@@ -84,7 +85,15 @@ const OrderContainer = ({ total, quantity }: Props) => {
           <h3>Cart Summary</h3>
           <span>Items: {quantity}</span>
           <span>Subtotal: $ {total}</span>
-          <button>Proceed to Buy</button>
+          <Link
+            to="/checkout"
+            style={{
+              textDecoration: "none",
+              color: "initial",
+            }}
+          >
+            <button>Proceed to Buy</button>
+          </Link>
         </div>
       </div>
     </div>

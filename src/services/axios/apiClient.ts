@@ -56,6 +56,17 @@ class APIClient<T> {
         return res.data;
       });
   };
+  getAllMatchProducts = (
+    config?: AxiosRequestConfig
+  ): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => {
+        // console.log(res.data);
+
+        return res.data;
+      });
+  };
 
   getSingleProduct = (
     config?: AxiosRequestConfig
