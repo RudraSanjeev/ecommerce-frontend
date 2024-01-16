@@ -11,9 +11,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateLogin } from "../../../../redux/userSlice";
 import { updateCart } from "../../../../redux/cartSlice";
+import { setCurrentAddress } from "../../../../redux/addressSlice";
 import APIClient from "../../../../services/axios/apiClient";
+// import { AddressEntity } from "../../../Accounts/components/singleAddress/SingleAddress";
 const Login = () => {
   const apiClient = new APIClient("/carts");
+  const apiClient2 = new APIClient("/address/current");
   const dispatch = useDispatch();
   const nav = useNavigate();
   const [hidePassword, setHidePassword] = useState(false);
@@ -24,6 +27,17 @@ const Login = () => {
     email: "",
     password: "",
   });
+  // const [currAddress, setCurrAddress] = useState<AddressEntity>({
+  //   _id: "",
+  //   fullName: "",
+  //   houseNo: "",
+  //   landmark: "",
+  //   city: "",
+  //   state: "",
+  //   pincode: "",
+  //   country: "",
+  //   mobileNumber: "",
+  // });
 
   useEffect(() => {
     AuthService.getToken() &&
@@ -44,6 +58,18 @@ const Login = () => {
           );
         });
   }, [AuthService.getToken()]);
+
+  // useEffect(() => {
+  //   AuthService.getToken() &&
+  //     apiClient2
+  //       .getCurrentAddress()
+  //       .then((res: any) => {
+  //         // setCurrAddress(res);
+  //         console.log(res);
+  //         dispatch(setCurrentAddress({ currentAddress: res }));
+  //       })
+  //       .catch((err) => console.log(err));
+  // }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -69,6 +95,14 @@ const Login = () => {
             token: res.token,
           })
         );
+
+        apiClient2
+          .getCurrentAddress()
+          .then((addressRes: any) => {
+            // console.log(addressRes);
+            dispatch(setCurrentAddress({ ...addressRes }));
+          })
+          .catch((err) => console.log(err));
       })
       .catch((error: AxiosError) => {
         console.log("error: " + error.response?.data);

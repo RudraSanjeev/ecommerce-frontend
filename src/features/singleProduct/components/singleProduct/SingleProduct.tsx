@@ -43,9 +43,9 @@ const SingleProduct = ({
   const [currImage, setCurrImage] = useState<string>(img[0] || "");
   const [cartQuantity, setCartQuantity] = useState<any>(1);
 
-  const { city } = useSelector((state: any) => state.address);
-
-  console.log(city);
+  const { city, state, pincode } = useSelector(
+    (state: any) => state.address.currentAddress
+  );
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -70,10 +70,7 @@ const SingleProduct = ({
       .then((res) => {
         const items = res.items;
         const itemLen = items.length;
-        // dispatch(addItemToCart({
-        //    {productId: items[itemLen-2].productId,
-        //   quantity: items[itemLen-2].quantity
-        // }, totalPrice: res.totalPrice }));
+
         {
           res.items &&
             dispatch(
@@ -88,24 +85,6 @@ const SingleProduct = ({
       .catch((error) => {
         console.error("Error:", error);
       });
-
-    // apiClient
-    //   .getAllCarts({
-    //     headers: {
-    //       token: `Bearer ${AuthService.getToken()}`,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     // const totalPrice = res.totalPrice;
-
-    //     // res.items.map((item :any) =>{
-    //     //     dispatch({cartItems: [...item]})
-    //     // })
-    //     // const items = res.items;
-    //     // const itemLen = items.length();
-    //     // dispatch(addItemToCart({ cartItems: {productId: items[itemLen-2].productId, quantity: items[itemLen-2].quantity}, totalPrice: res.totalPrice }));
-    //   });
   };
 
   return (
@@ -189,12 +168,13 @@ const SingleProduct = ({
         </div>
       </div>
       {/* buy option -- rightmost */}
+
       <div className="singleProductBuyOption">
         <span className="singleProductOptionAddress">
-          <LocationOnOutlinedIcon /> {currentAddress.city},{" "}
-          {currentAddress.state} {currentAddress.pincode}
+          {/* {city},{state} {pincode} */}
+          <LocationOnOutlinedIcon /> {city},{state} {pincode}
           <Link
-            to="/"
+            to="/accounts/address"
             className="link"
             style={{ marginLeft: "10px", color: "#222" }}
           >

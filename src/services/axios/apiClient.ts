@@ -164,6 +164,26 @@ class APIClient<T> {
         return res.data;
       });
   };
+  getCurrentAddress = (
+    config?: AxiosRequestConfig
+  ): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      });
+  };
+  updateCurrentAddress = (
+    config?: AxiosRequestConfig
+  ): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .patch<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      });
+  };
   deleteWishlist = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
     return axiosInstance
       .delete<FetchResponse<T>>(this.endpoint, config)

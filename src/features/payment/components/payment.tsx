@@ -5,13 +5,15 @@ import axios from "axios"; // Import Axios library
 import CheckoutForm from "./Checkout";
 import AuthService from "../../../services/axios/AuthService";
 import "./payment.scss";
+import { useSelector } from "react-redux";
 const stripePromise = loadStripe(
   "pk_test_51OHngASIg5uZxo3zYPaBcaFDcBglgldAeg7HXOYtGpVz6mElNmw9Jh5RVXlIhAZM4TakxUVbCmrtMwTZ2gAEzBOy00tVRvTU6d"
 );
 
 const Payment = () => {
   const [clientSecret, setClientSecret] = useState("");
-
+  const { _id } = useSelector((state: any) => state.address.currentAddress);
+  console.log(_id);
   useEffect(() => {
     axios
       .post(
