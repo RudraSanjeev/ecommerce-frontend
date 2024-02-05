@@ -77,7 +77,7 @@ const Header = () => {
       <div className="headerOption">
         <span className="headerOptionItem">
           <select name="En">
-            <option value="english">🇮🇳 En</option>
+            <option value="hindi">🇮🇳 En</option>
             <option value="hindi">🇮🇳 Hi</option>
           </select>
         </span>

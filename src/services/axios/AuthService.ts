@@ -76,6 +76,26 @@ class AuthService {
         throw error; // Propagate the error to the calling code
       });
   };
+  static forgotPassword = (email: string) => {
+    return axios
+      .post(URL + "/reset-password", { email })
+      .then((res) => {
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        throw error; // Propagate the error to the calling code
+      });
+  };
+  static updatePassword = (password: string, token: string) => {
+    return axios
+      .post(URL + `/update-password/${token}`, { password })
+      .then((res) => {
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        throw error; // Propagate the error to the calling code
+      });
+  };
 }
 
 export default AuthService;

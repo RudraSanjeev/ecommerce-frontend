@@ -188,7 +188,7 @@ const Login = () => {
               )}
             </span>
           )}
-          <small>password must be atleast 6 characters</small>
+          {hidePassword && <small>password must be atleast 6 characters</small>}
           {!hidePassword && (
             <button
               disabled={!loginData.email.includes("@")}

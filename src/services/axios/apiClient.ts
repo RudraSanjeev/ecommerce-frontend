@@ -192,6 +192,15 @@ class APIClient<T> {
         return res.data;
       });
   };
+
+  resetPassword = (config?: AxiosRequestConfig): Promise<FetchResponse<T>> => {
+    return axiosInstance
+      .post<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      });
+  };
 }
 
 export default APIClient;

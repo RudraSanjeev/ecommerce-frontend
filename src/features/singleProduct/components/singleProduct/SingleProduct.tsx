@@ -8,7 +8,7 @@ import policy1 from "../../assets/singleProductPolicies/icon-cod._CB485937110_.p
 import policy2 from "../../assets/singleProductPolicies/icon-returns._CB484059092_.png";
 import policy3 from "../../assets/singleProductPolicies/icon-top-brand._CB617044271_.png";
 import policy4 from "../../assets/singleProductPolicies/trust_icon_free_shipping_81px._CB630870460_.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import APIClient from "../../../../services/axios/apiClient";
 import AuthService from "../../../../services/axios/AuthService";
 import { addItemToCart } from "../../../../redux/cartSlice";
@@ -42,10 +42,17 @@ const SingleProduct = ({
   const apiClient = new APIClient("/carts");
   const [currImage, setCurrImage] = useState<string>(img[0] || "");
   const [cartQuantity, setCartQuantity] = useState<any>(1);
+  const nav = useNavigate();
 
   const { city, state, pincode } = useSelector(
-    (state: any) => state.address.currentAddress
+    (state: any) =>
+      state.address.currentAddress || {
+        city: "",
+        state: "",
+        pincode: "",
+      }
   );
+  const token = AuthService.getToken();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -58,6 +65,10 @@ const SingleProduct = ({
 
   const handleCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (!token) {
+      nav("/login");
+      return;
+    }
     apiClient
       .addToCart(
         { items: { productId: _id, quantity: parseInt(cartQuantity) } },
@@ -172,9 +183,9 @@ const SingleProduct = ({
       <div className="singleProductBuyOption">
         <span className="singleProductOptionAddress">
           {/* {city},{state} {pincode} */}
-          <LocationOnOutlinedIcon /> {city},{state} {pincode}
+          <LocationOnOutlinedIcon /> {city}, {state} {pincode}
           <Link
-            to="/accounts/address"
+            to={token ? "/accounts/address" : "/login"}
             className="link"
             style={{ marginLeft: "10px", color: "#222" }}
           >

@@ -16,6 +16,8 @@ import {
   OrderContainer,
   WishlistContainer,
 } from "./features/Accounts/Index";
+import ForgotPassword from "./features/authentication/components/forgotPassword/ForgotPassword";
+import UpdatePassword from "./features/authentication/components/updatePassword/UpdatePassword";
 // import APIClient from "./services/axios/apiClient";
 
 const App = () => {
@@ -49,6 +51,14 @@ const App = () => {
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "/forgot-password",
+          element: <ForgotPassword />,
+        },
+        {
+          path: "/update-password/:token",
+          element: <UpdatePassword />,
         },
         {
           path: "/carts",
