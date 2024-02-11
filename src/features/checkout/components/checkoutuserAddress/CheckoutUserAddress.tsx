@@ -1,6 +1,6 @@
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import AddUserAddress from "../../../../components/address/AddUserAddress";
 import "./checkoutUserAddress.scss";
+import AddUserAddress from "../../../address/components/singleAddress/AddUserAddress";
 const CheckoutUserAddress = () => {
   return (
     <div className="checkoutUserAddress">

@@ -15,7 +15,8 @@ export const userSlice = createSlice({
       state.userInfo.token = action.payload.token;
     },
     removeLogin: (state: any) => {
-      state = null;
+      state.userInfo = null;
+      state.token = null;
     },
   },
 });

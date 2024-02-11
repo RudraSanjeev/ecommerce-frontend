@@ -22,14 +22,7 @@ interface Orders {
   orderStatus: string;
   createdAt: string;
 }
-const SingleOrder = ({
-  id,
-  items,
-  paymentMode,
-  paymentStatus,
-  orderStatus,
-  createdAt,
-}: Orders) => {
+const SingleOrder = ({ items, orderStatus, createdAt }: Orders) => {
   // const multiple = items.length;
   // console.log(items);
   const createdAtDate = new Date(createdAt);

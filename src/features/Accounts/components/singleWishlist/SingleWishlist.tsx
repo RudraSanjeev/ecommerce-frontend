@@ -22,11 +22,8 @@ const SingleWishlist = ({
   title,
   desc,
   img,
-  currency,
   price,
   quantity,
-  size,
-  color,
   inStock,
 }: Wishlist) => {
   const apiClient = new APIClient("/carts");

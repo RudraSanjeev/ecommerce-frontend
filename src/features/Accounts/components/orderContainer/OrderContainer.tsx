@@ -1,5 +1,4 @@
 import "./orderContainer.scss";
-import { singleOrderData } from "../../data/singleOrderData";
 // import SingleOrder from "../singleOrder/SingleOrder";
 import { SetStateAction, useEffect, useState } from "react";
 import APIClient from "../../../../services/axios/apiClient";
