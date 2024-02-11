@@ -28,7 +28,7 @@ export interface FetchResponse<T> {
 }
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "https://ecommerce-4b3v.onrender.com/api",
 });
 
 axiosInstance.interceptors.request.use((config) => {

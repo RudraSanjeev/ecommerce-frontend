@@ -45,7 +45,8 @@ const SingleCart = ({
     console.log(currCartQuantity);
     axios
       .patch(
-        `http://localhost:8000/api/carts/${id}`,
+        `https://ecommerce-4b3v.onrender.com/api/carts/${id}`,
+
         { items: { quantity: currCartQuantity } },
         {
           headers: {
@@ -94,7 +95,7 @@ const SingleCart = ({
   const handleCartDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:8000/api/carts/${id}`, {
+      .delete(`https://ecommerce-4b3v.onrender.com/api/carts/${id}`, {
         headers: {
           token: `Bearer ${AuthService.getToken()}`,
         },
@@ -116,7 +117,7 @@ const SingleCart = ({
   const handleAddToWishlist = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8000/api/wishlists`, {
+      .post(`https://ecommerce-4b3v.onrender.com/api/wishlists`, {
         headers: {
           token: `Bearer ${AuthService.getToken()}`,
         },
