@@ -13,7 +13,7 @@ export interface LoginEntity {
   password: string;
 }
 
-const URL = "https://ecommerce-4b3v.onrender.com/api/auth";
+const URL = "http://localhost:8000/api/auth";
 class AuthService {
   private static TOKEN_KEY = "token";
   private static USER_NAME = "username";

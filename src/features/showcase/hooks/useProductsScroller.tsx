@@ -4,7 +4,7 @@ import APIClient from "../../../services/axios/apiClient";
 
 const useProductScroller = () => {
   // here also you can pass limit to get spefic no of products
-  const apiClient = new APIClient("/products/all");
+  const apiClient = new APIClient("/products");
 
   const [products, setProducts] = useState<any>([]);
 
